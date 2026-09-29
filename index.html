@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaza Verde — Catálogo de produtos naturais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f8f1; --surface:#ffffff; --ink:#1f2a1c; --muted:#5d6b58; --line:#dfe6d8;
+  --green:#4c9a2a; --green-d:#2f6f14; --rust:#8a3b1a; --chip:#e9f0e2; --warn:#fff4e5;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a12; --surface:#1c241a; --ink:#e9efe4; --muted:#a2b09b; --line:#2c3728;
+  --green:#7ccb55; --green-d:#a5e383; --rust:#e58a5f; --chip:#25311f; --warn:#33291a;}}
+:root[data-theme="dark"]{
+  --bg:#141a12; --surface:#1c241a; --ink:#e9efe4; --muted:#a2b09b; --line:#2c3728;
+  --green:#7ccb55; --green-d:#a5e383; --rust:#e58a5f; --chip:#25311f; --warn:#33291a;}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 Figtree,system-ui,sans-serif}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px}
+.brand{font:800 26px/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;color:var(--rust)}
+.brand small{display:block;font:500 11px/1.2 Figtree,sans-serif;letter-spacing:.32em;color:var(--green-d);margin-top:3px}
+.tel{margin-left:auto;color:var(--muted);font-size:14px;text-decoration:none}
+.cartbtn{background:var(--green-d);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-weight:700;display:flex;gap:8px;align-items:center}
+:root[data-theme="dark"] .cartbtn{color:#10200a;background:var(--green)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cartbtn{color:#10200a;background:var(--green)}}
+main{max-width:1180px;margin:0 auto;padding:22px 16px 90px}
+h1{font:800 clamp(28px,5vw,44px)/1.05 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 16px;max-width:60ch}
+.search{width:100%;font:inherit;font-size:18px;padding:14px 16px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+.search:focus{border-color:var(--green);outline:none}
+.layout{display:grid;grid-template-columns:250px 1fr;gap:26px;margin-top:20px;align-items:start}
+nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);max-height:calc(100vh - 100px);overflow:auto;padding-right:6px}
+nav button{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:0;padding:7px 10px;border-radius:8px;color:var(--ink)}
+nav button:hover{background:var(--chip)}
+nav button[aria-pressed="true"]{background:var(--green-d);color:#fff;font-weight:700}
+:root[data-theme="dark"] nav button[aria-pressed="true"]{color:#10200a;background:var(--green)}
+nav span{color:var(--muted);font-size:13px}
+nav button[aria-pressed="true"] span{color:inherit;opacity:.8}
+h2{font:800 22px/1.1 "Bricolage Grotesque",sans-serif;margin:26px 0 8px;color:var(--rust)}
+h2:first-child{margin-top:0}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:6px 14px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line)}
+.name{font-weight:500}
+.vol{display:block;font-size:13px;color:var(--muted)}
+.price{font-weight:700;white-space:nowrap;text-align:right;min-width:74px}
+.add{background:var(--chip);color:var(--green-d);border:1.5px solid var(--green);border-radius:9px;padding:7px 14px;font-weight:700;min-width:104px}
+:root[data-theme="dark"] .add{color:var(--green-d)}
+.add:hover{background:var(--green);color:#fff}
+.step{display:inline-flex;align-items:center;border:1.5px solid var(--green);border-radius:9px;overflow:hidden;min-width:104px;justify-content:space-between}
+.step button{background:var(--chip);border:0;width:34px;height:34px;font-size:18px;font-weight:700;color:var(--ink)}
+.step b{min-width:26px;text-align:center}
+.out{color:var(--rust);font-weight:700;font-size:14px;text-align:right;min-width:104px}
+.empty{padding:40px 8px;color:var(--muted)}
+.note{background:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px;margin-top:26px}
+@media (max-width:820px){
+  .layout{grid-template-columns:1fr}
+  nav{position:static;max-height:none;display:flex;gap:6px;overflow-x:auto;padding:0 0 6px}
+  nav button{flex:none;width:auto;background:var(--chip);border-radius:99px;white-space:nowrap;gap:6px}
+  .tel{display:none}.cartbtn{margin-left:auto}
+  .row{grid-template-columns:1fr auto}
+  .row .price{grid-column:1;text-align:left}
+  .row .ctl{grid-column:2;grid-row:1 / span 2}
+}
+/* carrinho */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:30;display:none}
+.scrim.on{display:block}
+aside{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);z-index:40;transform:translateX(100%);transition:transform .22s;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+aside.on{transform:none}
+@media (prefers-reduced-motion:reduce){aside{transition:none}}
+.ah{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.ah h3{margin:0;font:800 20px "Bricolage Grotesque",sans-serif}
+.x{background:none;border:0;font-size:26px;color:var(--ink);width:40px;height:40px}
+.items{flex:1;overflow:auto;padding:4px 16px}
+.ci{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}
+.ci .price{min-width:0}
+.af{padding:14px 16px;border-top:1px solid var(--line);display:grid;gap:10px}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:800}
+.af input{font:inherit;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.wa{background:#1f9d4c;color:#fff;border:0;border-radius:10px;padding:13px;font-weight:800;font-size:17px;text-align:center;text-decoration:none;display:block}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.sec{background:none;border:1.5px solid var(--line);border-radius:10px;padding:10px;color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;z-index:60;display:none}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand">kazaverde<small>produtos naturais</small></div>
+  <a class="tel" href="tel:+551239612001">(12) 3961-2001</a>
+  <button class="cartbtn" id="openCart" aria-label="Abrir pedido">Pedido <span id="cnt">0</span></button>
+</div></header>
+
+<main>
+  <h1>Catálogo de produtos naturais</h1>
+  <p class="sub">Lista de preços de julho de 2026. Escolha os itens, monte o pedido e envie pelo WhatsApp.</p>
+  <input class="search" id="q" type="search" placeholder="Buscar produto, marca ou tipo (ex.: granola, própolis, magnésio)" aria-label="Buscar produtos" autocomplete="off">
+  <div class="layout">
+    <nav id="nav" aria-label="Categorias"></nav>
+    <section id="list" aria-live="polite"></section>
+  </div>
+  <p class="note">Preços sujeitos a alteração sem prévio aviso. Distribuição Kaza Verde · kazaverde@gmail.com · (12) 3961-2001</p>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside id="cart" aria-label="Seu pedido" aria-hidden="true">
+  <div class="ah"><h3>Seu pedido</h3><button class="x" id="closeCart" aria-label="Fechar">×</button></div>
+  <div class="items" id="items"></div>
+  <div class="af">
+    <div class="tot"><span>Total</span><span id="tot">R$ 0,00</span></div>
+    <input id="cust" placeholder="Seu nome ou nome da loja" aria-label="Seu nome">
+    <a class="wa" id="wa" href="#" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+    <p class="hint" id="hint" hidden>Pedido copiado. Se o WhatsApp mostrar erro de bloqueio, abra a conversa com (12) 99625-4466 no WhatsApp Web ou no celular e cole a mensagem.</p>
+    <button class="sec" id="copy">Copiar pedido</button>
+    <button class="sec" id="clear">Esvaziar pedido</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+// Troque pelo número de WhatsApp da Kaza Verde (código do país + DDD + número, só dígitos)
+const WHATSAPP = "5512996254466";
+
+const RAW = `## Qualicôco
+Cacau em Pó Alcalino 100%|200g|18,50
+Manteiga de Coco com sal|200g|13,90
+Manteiga de Coco sem sal|200g|13,90
+Like Mayo Maionese Vegetal|335g|13,50
+Achocolatado em Pó ZEROU! Zero açúcar|200g|14,50
+Shoyo de Coco|250ml|18,50
+Néctar de Coco|250ml|24,90
+## Terra dos Grãos
+Aveia sem Glúten média|400g|14,90
+Farinha de Aveia sem Glúten|400g|14,90
+Pasta de Amendoim Tradicional|1kg|18,00
+Pasta de Amendoim Crocante|1kg|18,00
+Pasta de Amendoim com Avelã e Cacau|500g|22,90
+Melado de Cana garrafa|1,2kg|22,90
+Melado de Cana garrafa|450g|10,50
+## Bionatus
+Colagen II Renew (colágeno tipo 2, cálcio, vit. D, magnésio)|30 caps|27,80
+Colagen II Hialurox (colágeno tipo 2, ácido hialurônico, magnésio)|30 caps|30,00
+Colagen II Sênior (colágeno tipo 2, vitamina D, cálcio)|60 caps|29,50
+Colagen II MSM (colágeno tipo 2, MSM, vit. D3)|60 caps|31,00
+Colagen II Renew (colágeno tipo 2, cálcio, vit. D, magnésio)|60 caps|45,00
+## Granola Gran-Pic
+Granola artesanal Gran-Pic|1kg|23,50
+Granola artesanal Gran-Pic|500g|11,90
+## Granola Martigran
+Granola Martigran Tradicional|1kg|13,90
+Granola Martigran Chocolate|1kg|13,90
+Granola Martigran Frutas|1kg|13,90
+Granola Martigran Castanhas|1kg|13,90
+Granola Martigran sem Açúcar|1kg|13,90
+## Ubon
+Essência concentrada Lavanda|140ml|14,50
+Essência concentrada Eucalipto|140ml|14,50
+Essência concentrada Lima Limão|140ml|14,50
+Sabonete de Leite de Cabra|100g|5,50
+Sabonete de Calêndula|100g|4,90
+Sabonete de Própolis|100g|4,90
+Sabonete de Erva Doce|100g|4,90
+Sabonete de Eucalipto|100g|4,90
+Sabonete de Glicerina|100g|4,90
+Sabonete de Óleo de Coco|100g|6,10
+Sabonete Líquido Leite de Cabra refil|350ml|12,90
+## Pazze
+Matcha|30g|8,70
+Óleo de Semente de Abóbora e Linhaça|250ml|35,50
+Óleo de Linhaça Dourada|250ml|21,00
+Óleo de Gergelim|250ml|23,70
+Óleo de Girassol|250ml|20,50
+Óleo de Semente de Uva|250ml|27,50
+Óleo de Semente de Abóbora|250ml|42,90
+Óleo de Abacate|250ml|32,90
+## Pastas de Amendoim Thiani
+Pasta de Amendoim c/ Chocolate Belga + Whey com chocolate branco|500g|31,90
+Pasta de Amendoim c/ mel crocante|500g|20,90
+Pasta de Amendoim c/ mel e cacau crocante|500g|20,90
+Pasta de Amendoim integral crocante|500g|12,50
+Pasta de Amendoim c/ mel, cacau e coco|500g|21,90
+Pasta de Amendoim c/ Pistache Premium|500g|33,90
+Pasta de Amendoim c/ mel crocante|1,010kg|35,90
+Pasta de Amendoim c/ mel e cacau crocante|1,010kg|35,90
+Pasta de Amendoim integral crocante|1,010kg|21,00
+Pasta de Amendoim c/ mel, cacau e coco|1,010kg|38,50
+Pasta de Amendoim c/ mel, chocolate branco com cookies|1,010kg|43,90
+Pasta de Amendoim c/ mel, chocolate branco crocante|1,010kg|41,50
+## Vinagre São Miguel
+Vinagre de maçã|500ml|5,60
+Vinagre de maçã|750ml|8,70
+## Vinagre São Francisco
+Vinagre de Maçã Orgânico São Francisco, acidez 4,2%|500ml|21,90
+Caixa fechada c/ 12 un. Vinagre São Francisco|12 × 500ml|260,00
+Vinagre de Maçã Orgânico São Francisco, acidez 6%|250ml|16,90
+Vinagre de Vinho Tinto Orgânico São Francisco|500ml|21,90
+Vinagre de Maçã Orgânico Serra Gaúcha, acidez 4%|500ml|18,90
+## Econatura
+Suco de Uva Orgânico Bordô Organovita|1L|27,90
+Suco de Uva Orgânico Bordô Uva Só|1L|26,90
+Suco de Uva Orgânico Bordô|300ml|11,50
+Vinagre de Maçã Orgânico Organobio|500ml|19,90
+Farinha de Casca da Uva Orgânica|100g|10,90
+Farinha de Maçã Orgânica|100g|10,90
+## Só Fruta
+Suco de Uva Tinto Integral|1,5L|25,90
+Suco de Uva Tinto Integral|1L|19,50
+Suco de Uva Tinto Integral|500ml|11,40
+## Biosoft
+Cookies Aveia e mel com chocolate Light|100g|5,20
+Cookies Castanha com Chocolate Light|100g|5,20
+Cookies Zero Açúcar, Chocolate com Chocolate|100g|6,50
+Cookies Zero Açúcar, Baunilha com Chocolate|100g|6,50
+Cookie Zero Açúcar, Coco com Chocolate|100g|6,50
+Cookie Zero Açúcar, Banana e aveia com chocolate|100g|6,50
+Granola 35 ingredientes|1kg|34,00
+Granola Ameixa, mamão e linhaça Light|1kg|32,50
+Granola c/ castanhas|1kg|34,00
+Granola c/ frutas zero açúcar|1kg|37,50
+Granola com castanhas Diet|1kg|37,50
+Granola 35 ingredientes|230g|9,20
+Granola c/ castanhas|230g|9,20
+Granola c/ frutas zero açúcar|230g|10,00
+Granola com castanhas Diet|230g|10,00
+Palitos de fibras Fibritos Frutas vermelhas (un. R$ 1,60)|cx c/ 15|24,00
+Palitos de fibras Fibritos Banana (un. R$ 1,60)|cx c/ 15|24,00
+Palitos de fibras Fibritos Ameixa preta (un. R$ 1,80)|cx c/ 15|27,00
+Palitos de fibras Fibritos Abacaxi e coco (un. R$ 1,60)|cx c/ 15|24,00
+Palitos de fibras Fibritos Castanha com Chocolate (un. R$ 1,90)|cx c/ 15|28,00
+Palitos de fibras Fibritos Coco com Chocolate (un. R$ 1,90)|cx c/ 15|28,00
+Palitos de Fibras Light Fibritos Com castanhas (un. R$ 1,80)|cx c/ 15|27,00
+Palitos de Fibras Light Fibritos Morango com Chocolate (un. R$ 2,15)|cx c/ 15|32,00
+Palitos de Fibras Light Fibritos Mamão, banana e maçã (un. R$ 2,15)|cx c/ 15|32,00
+Biscoito de Doce de Leite Zero Açúcar / Zero lactose|100g|5,70
+Biscoito Amanteigado Zero Açúcar / Zero lactose|100g|5,70
+Rosquinha com Coco Zero Lactose|100g|5,70
+Rosquinha Leite Zero Lactose|100g|5,70
+## Sweet Jelly
+Balas jelly|60g|3,90
+Balas jelly|200g|12,20
+Balas jelly|500g|26,00
+Balas jelly sabor morango|200g|12,20
+Balas jelly sabor morango|500g|26,00
+## Banana Mania
+Banana passa|100g|3,90
+Banana passa|200g|7,50
+Banana passa c/ chocolate (branco / preto), barra|28g|2,40
+Banana passa c/ chocolate (branco / preto) light sem açúcar, barra|28g|2,40
+Banana passa c/ ameixa, barra|28g|2,40
+Banana passa c/ chocolate 72% cacau, barra|28g|2,40
+Banana passa c/ chocolate (branco / preto) a granel|1kg|70,00
+Banana passa c/ chocolate (branco / preto) diet a granel|1kg|75,00
+Banana passa c/ chocolate (branco / preto), pacote c/ 4|65g|4,50
+Banana passa c/ chocolate (branco / preto) diet, pacote c/ 4|65g|4,90
+## Linha Live
+Óleo de Linhaça dourada extra virgem|250ml|17,90
+Cevada solúvel|200g|18,50
+## Sal do Himalaia
+Sal Rosa do Himalaia fino 0,5–1 mm|1kg|10,90
+Sal Rosa do Himalaia granulado 3–5 mm|1kg|10,90
+## Pharmakos D'Amazônia
+Gel de Arnica|220g|12,90
+Óleo de Amêndoas doce|30ml|7,90
+Óleo de Andiroba|30ml|9,50
+Óleo de Copaíba|30ml|12,70
+Óleo de Mamona|30ml|8,20
+Óleo de Rosa mosqueta|30ml|16,70
+Óleo Elétrico|30ml|12,40
+Ice gel|220g|11,00
+Shampoo de Jaborandi|350ml|14,90
+Condicionador de Jaborandi|350ml|14,50
+## Suavipan
+Bolinho light sem açúcar, cx c/ 12 (cenoura c/ chocolate, baunilha c/ morango, chocolate c/ chocolate, baunilha c/ chocolate, chocolate c/ baunilha, baunilha, laranja c/ laranja)|cx c/ 12 × 40g|51,60
+Bolinho light sem açúcar, unitário (mesmos sabores)|40g|4,30
+Bolinho integral (castanha do pará / 7 grãos), cx c/ 12|cx c/ 12 × 40g|51,60
+Alfajor Lev Slim chocolate ao leite|25g|7,70
+Bolo Zero (laranja / coco / chocolate / abacaxi / mesclado / fubá)|250g|18,50
+Bolo Integral zero açúcar (nozes / banana / maçã)|250g|18,50
+## Bananinha Paraibuna
+Bananinha granel c/ açúcar|36g|2,60
+Bananinha granel s/ açúcar|23g|2,90
+Bananinha pacote s/ açúcar|200g|19,90
+Display bananinha (40 unidades)|36g/un|99,00
+Display bananinha s/ açúcar (40 unidades)|23g/un|112,00
+## Proteínas
+Creatina Monohidratada Pura|1kg|49,00
+Creatina Monohidratada Pura (pacote embalado)|300g|19,00
+Albumina|1kg|87,00
+Whey Protein Concentrado 80% WPC|1kg|115,00
+Whey Protein Concentrado 80% WPC (pacote embalado)|500g|60,00
+Glutamina|1kg|78,00
+## Cereais e diversos a granel
+Aveia flocos (média, grossa)|1kg|6,50
+Açaí puro|1kg|55,00
+Açúcar mascavo Docican|1kg|8,70
+Açúcar mascavo orgânico|1kg|9,10
+Açúcar orgânico claro Native|1kg|7,30
+Açúcar orgânico dourado Native|1kg|8,00
+Açúcar de coco|1kg|38,00
+Agar agar|1kg|72,00
+Amaranto farinha|1kg|29,50
+Amaranto grãos|1kg|30,00
+Ameixa sem caroço|1kg|36,50
+Amêndoa (chilena)|1kg|82,00
+Amêndoa defumada|1kg|86,00
+Amêndoa torrada e salgada|1kg|80,00
+Amêndoa laminada|1kg|83,00
+Amêndoa farinha|1kg|80,00
+Avelã crua|1kg|110,00
+Amendoim sem pele c/ sal|1kg|20,00
+Amendoim sem pele s/ sal|1kg|20,00
+Amendoim graúdo torrado salgado|1kg|18,00
+Amendoim ovinho|1kg|19,00
+Amendoim doce praline|1kg|21,00
+Amendoim sabores (cebola e salsa / picante / churrasco / japonês)|1kg|19,50
+Amendoim sabores (amarelo crocante)|1kg|18,50
+Amido de milho|1kg|5,00
+Argila branca|1kg|5,00
+Argila medicinal|1kg|5,00
+Argila verde|1kg|4,00
+Arroz cateto integral|1kg|15,50
+Arroz cateto com vermelho integral|1kg|15,90
+Arroz integral|1kg|8,00
+Arroz integral com vermelho|1kg|10,90
+Arroz preto|1kg|30,00
+Batata doce em pó|1kg|24,00
+Bicarbonato de sódio|1kg|7,00
+Blueberry|1kg|160,00
+Beterraba em pó|1kg|55,00
+Chia semente|1kg|31,00
+Cacau natural|1kg|37,00
+Cacau nibs|1kg|89,00
+Castanha de caju SLW1 sem sal|1kg|82,50
+Castanha de caju SLW1 com sal|1kg|82,50
+Castanha de caju caramelizada (com gergelim / com mel)|1kg|52,00
+Castanha de caju assada sem sal|1kg|82,50
+Castanha de caju crua|1kg|82,50
+Castanha de caju xerém|1kg|45,00
+Castanha do Pará média|1kg|149,00
+Castanha do Pará quebrada|1kg|falta
+Catuaba em pó|1kg|30,00
+Cevada em grão|1kg|10,50
+Colágeno hidrolisado|1kg|75,00
+Coco ralado fino|1kg|35,00
+Chips de coco zero açúcar|1kg|89,00
+Cranberry partida|1kg|48,00
+Damasco|1kg|110,00
+Dolomita|1kg|4,75
+Eritritol|1kg|31,00
+Ervilha inteira|1kg|8,50
+Ervilha partida|1kg|10,50
+Farelo de aveia|1kg|7,00
+Farelo de trigo fino|1kg|7,50
+Farelo de trigo grosso|1kg|10,50
+Farinha de arroz|1kg|7,80
+Farinha de arroz integral|1kg|8,00
+Farinha de aveia|1kg|6,50
+Farinha de amendoim|1kg|17,00
+Farinha de banana verde|1kg|32,00
+Farinha de coco clara|1kg|25,00
+Farinha de centeio|1kg|8,00
+Farinha de feijão branco|1kg|15,00
+Farinha de laranja amarga|1kg|37,00
+Farinha de maracujá|1kg|12,00
+Farinha de trigo integral|1kg|6,30
+Farinha de uva|1kg|39,00
+Farinha de casca de uva orgânica|1kg|60,00
+Farinha de berinjela|1kg|45,00
+Farinha de grão de bico|1kg|21,00
+Feijão azuki|1kg|12,00
+Feijão branco|1kg|21,00
+Fécula de batata|1kg|10,50
+Fung seco|1kg|87,00
+Goji berry fruta desidratada|1kg|50,00
+Goma xantana|1kg|62,00
+Goma guar|1kg|28,00
+Gengibre em pó importado|1kg|36,00
+Gergelim preto|1kg|30,00
+Gergelim c/ casca|1kg|14,00
+Gergelim s/ casca|1kg|24,00
+Gérmen de trigo tostado|1kg|17,00
+Gelatina sem sabor|1kg|66,00
+Ginseng em pó|1kg|65,00
+Ginkgo biloba em pó|1kg|47,00
+Glúten de trigo|1kg|45,00
+Grão de bico|1kg|21,00
+Guaraná em pó Jomil|1kg|170,00
+Leite de soja instantâneo (PSA)|1kg|35,00
+Leite de soja integral|1kg|17,00
+Lentilha|1kg|20,00
+Lentilha vermelha|1kg|21,00
+Levedo de cerveja em pó|1kg|38,00
+Leite de coco em pó claro importado premium HI-FAT 60%/65%|1kg|115,00
+Leite de coco em pó tradicional|1kg|50,00
+Linhaça marrom semente|1kg|12,00
+Linhaça dourada semente|1kg|12,00
+Linhaça moída dourada|1kg|13,00
+Linhaça moída marrom|1kg|12,50
+Maca peruana em pó (gelatinizada)|1kg|92,00
+Maca peruana preta em pó (gelatinizada)|1kg|135,00
+Maca peruana vermelha em pó (gelatinizada)|1kg|119,00
+Maçã em farinha|1kg|50,00
+Macadâmia torrada com sal|1kg|140,00
+Macadâmia sem sal|1kg|140,00
+Marapuama em pó|1kg|29,00
+Milho de pipoca|1kg|6,50
+Milho torrado sabor mostarda e mel|1kg|53,50
+Mix de castanhas e frutas|1kg|80,00
+Mix de castanhas agridoce|1kg|85,00
+Nozes mariposa inteira extra light|1kg|86,00
+Nozes mariposa quartz extra light (quebrada)|1kg|64,00
+Painço|1kg|25,00
+Psyllium fibra|1kg|40,00
+Polvilho doce|1kg|6,80
+Polvilho azedo|1kg|7,50
+Pistache torrado e salgado|1kg|115,00
+Proteína texturizada de soja graúda (escura)|1kg|18,50
+Proteína texturizada de soja graúda (clara)|1kg|15,90
+Proteína texturizada de soja miúda (escura / clara)|1kg|16,90
+Proteína isolada de soja 92,4%|1kg|45,00
+PTS granulada (bacon vegetal)|1kg|28,00
+Quinoa real flocos|1kg|38,00
+Quinoa real grão|1kg|30,00
+Quinoa real farinha|1kg|37,00
+Quinoa grão preto|1kg|39,00
+Quinoa grão vermelho|1kg|39,00
+Semente de abóbora crua sem casca|1kg|90,00
+Semente de girassol s/ casca crua|1kg|20,00
+Semente de girassol s/ casca tostada|1kg|34,00
+Soja em grão|1kg|6,50
+Soja partida|1kg|10,50
+Tâmara sem caroço|1kg|27,50
+Tâmara jumbo|1kg|50,00
+Tapioca Pantanal|1kg|8,00
+Trigo em grão|1kg|8,00
+Trigo para kibe|1kg|8,50
+Uva passa branca|1kg|33,00
+Uva passa preta|1kg|30,00
+Xilitol|1kg|34,00
+## Temperos naturais
+Alho poró|1kg|73,00
+Açafrão em pó|1kg|40,00
+Alho em pó|1kg|15,00
+Alho frito|1kg|37,00
+Alho granulado|1kg|45,00
+Canela java em pó|1kg|33,00
+Cebola em pó|1kg|26,00
+Cebola em flocos|1kg|30,00
+Cebolinha verde|1kg|50,00
+Cravo em flor|1kg|119,00
+Colorau|1kg|12,50
+Cominho moído|1kg|46,00
+Cominho em grãos|1kg|40,00
+Coentro grão|1kg|18,50
+Coentro folha|1kg|47,00
+Chimichurri|1kg|33,00
+Curry|1kg|14,50
+Ervas finas|1kg|39,00
+Lemon pepper|1kg|28,00
+Manjericão|1kg|20,00
+Manjerona|1kg|29,00
+Noz moscada em pó|1kg|90,00
+Orégano|1kg|40,00
+Páprica doce|1kg|34,00
+Páprica picante|1kg|34,00
+Páprica defumada|1kg|37,00
+Pimenta síria|1kg|150,00
+Pimenta do reino grão|1kg|89,00
+Pimenta do reino moída|1kg|89,00
+Pimenta cayena moída|1kg|63,00
+Salsa|1kg|32,50
+Semente de mostarda|1kg|28,50
+Tomate seco|1kg|55,00
+Tomilho|1kg|28,50
+## Plantas medicinais (chás)
+Abacateiro|30g|2,00
+Agoniada|30g|2,00
+Alcachofra|30g|2,00
+Alcaçuz|30g|2,00
+Alecrim Rosmarinus|30g|2,00
+Alfafa|30g|2,00
+Alfavaca|30g|2,00
+Alfazema comercial|30g|2,00
+Alfazema extra|30g|6,00
+Amora|30g|2,00
+Angélica|30g|2,00
+Anis estrelado|30g|4,00
+Arnica do mato|30g|2,00
+Aroeira|30g|2,00
+Arruda|30g|2,00
+Artemísia|30g|2,00
+Assa-peixe|30g|2,00
+Bálsamo|30g|2,00
+Barbatimão|30g|2,00
+Bardana|30g|2,00
+Boldo do Chile|30g|2,50
+Buchinha do Norte|30g|3,00
+Bugre|30g|2,00
+Cabelo de milho|30g|2,00
+Calêndula (margarida dourada)|30g|3,00
+Camomila|30g|2,50
+Cana do brejo|30g|2,00
+Canela java em pau|30g|3,00
+Canela de velho|30g|2,00
+Cânfora pedra (não é chá)|15g|6,00
+Capim cidreira|30g|2,00
+Capim gordura|30g|2,00
+Cardamomo semente|30g|10,00
+Carobinha|30g|2,00
+Carqueja|30g|2,00
+Carqueja doce|30g|2,00
+Cáscara sagrada|30g|4,00
+Casca danta|30g|2,00
+Castanha da Índia|30g|2,00
+Catuaba|30g|2,00
+Cavalinha|30g|2,00
+Centella em pó|30g|2,00
+Centella|30g|2,50
+Chapéu de couro|30g|2,00
+Erva cidreira|30g|2,00
+Cipó cabeludo (cipó d'água)|30g|2,00
+Cipó cruz|30g|2,00
+Cipó mil homens|30g|2,00
+Composto colesterol|50g|4,00
+Composto peitoral|50g|4,00
+Composto renal|50g|4,00
+Confrei|30g|2,00
+Dente de leão|30g|2,00
+Equinácea|30g|3,00
+Erva baleeira|30g|2,00
+Erva de bicho|30g|2,00
+Erva de Santa Maria|30g|3,00
+Erva de São João|30g|2,00
+Erva doce|30g|2,00
+Espinheira santa|30g|2,00
+Eucalipto|30g|2,00
+Folha de louro|30g|2,00
+Folículos de sene|30g|2,00
+Fucus|30g|2,00
+Funcho|30g|2,00
+Garcínia|30g|3,00
+Garra do diabo|30g|5,00
+Gengibre|30g|2,50
+Gervão|30g|2,00
+Ginkgo biloba|30g|3,00
+Ginseng|30g|2,00
+Graviola|30g|2,00
+Guaçatonga|30g|2,00
+Guaco|30g|2,00
+Hibisco|30g|2,00
+Hortelã|30g|2,00
+Ipê roxo|30g|2,00
+Jaborandi|30g|2,00
+Jambolão|30g|2,00
+Japecanga|30g|2,00
+Jasmim|30g|5,00
+Jatobá|30g|2,00
+Juá|30g|2,00
+Jurubeba|30g|2,00
+João da Costa|30g|2,00
+Levante|30g|2,00
+Losna|30g|2,00
+Louro|30g|2,00
+Lúpulo|30g|2,00
+Maçã desidratada|30g|2,00
+Macela|30g|2,50
+Malva|30g|2,00
+Mamica de cadela|30g|2,00
+Mangaba|30g|2,00
+Maracujá|30g|2,00
+Marapuama|30g|2,00
+Melissa|30g|2,00
+Mentruz|30g|2,00
+Mulungu|30g|2,00
+Nogueira|30g|2,00
+Oliveira|30g|2,00
+Parietária|30g|2,00
+Pariparoba|30g|2,00
+Pata de vaca|30g|2,00
+Pau de ferro|30g|2,00
+Pau pereira|30g|2,00
+Pau tenente|30g|2,00
+Pedra ume caá|30g|3,00
+Picão branco|30g|2,00
+Picão preto|30g|2,00
+Poejo|30g|2,50
+Porangaba|30g|2,00
+Psyllium em pó|30g|2,00
+Psyllium em pó|100g|5,50
+Quebra pedra|30g|3,50
+Quina quina|30g|2,00
+Quina vermelha|30g|2,00
+Raiz de lótus|30g|4,50
+Romã|30g|3,50
+Rosa rubra|30g|10,00
+Ruibarbo|30g|2,50
+Sabugueiro|30g|8,00
+Salsaparrilha|30g|2,50
+Sálvia|30g|2,00
+Sene|30g|2,00
+Sene foliculo|30g|2,00
+Sete sangrias|30g|2,00
+Stévia|30g|2,50
+Sucupira|30g|2,00
+Tanchagem|30g|2,00
+Tília|30g|6,00
+Tribulus terrestre em pó|50g|4,90
+Tribulus terrestre em pó|200g|19,00
+Unha de gato folha|30g|2,00
+Urucum|30g|2,00
+Uxi amarelo|30g|2,00
+Valeriana|30g|6,00
+## Sabonetes glicerinados
+Sabonete Glicerinado Barbatimão|70g|3,00
+Sabonete Glicerinado Enxofre|70g|3,00
+Sabonete Glicerinado Arnica|70g|3,00
+Sabonete Glicerinado Carobinha|70g|3,00
+Sabonete Glicerinado Juá|70g|3,00
+Sabonete Glicerinado Juá Jaborandi Mutamba|70g|3,00
+Sabonete Glicerinado Calêndula|70g|3,00
+Sabonete Glicerinado Alfazema|70g|3,00
+Sabonete Glicerinado 7 Ervas|70g|3,00
+Sabonete Glicerinado Jaborandi Composto|70g|3,00
+Sabonete Glicerinado Babosa|70g|3,00
+Sabonete Glicerinado Mutamba|70g|3,00
+Sabonete Glicerinado Alecrim|70g|3,00
+## Pomadas medicinais
+Pomada Banha de Peixe Elétrico|20g|2,80
+Pomada Curador Barbatimão|20g|2,80
+Pomada Curador Aiodex|20g|2,80
+Pomada Curador Andiroba|20g|2,80
+Pomada Curador Arnica|20g|2,80
+Pomada Curador Bálsamo Rio Negro|20g|2,80
+Pomada Curador Calêndula|20g|2,80
+Pomada Curador Carobinha|20g|2,80
+Pomada Curador Cravos e Espinhas|20g|2,80
+Pomada Curador Enxofre|20g|2,80
+Pomada Curador Erva de Bicho|20g|2,80
+Pomada Curador Mentol|20g|2,80
+Pomada Curador Sucupira|20g|2,80
+Pomada Curador Unha de Gato|20g|2,80
+Pomada Curador Unheiro|20g|2,80
+Pomada Curedermy Própolis|20g|2,80
+Pomada Gelmax|20g|2,80
+Pomada Curador Canela de Velho|20g|2,80
+Pomada Rachaderme|20g|2,80
+## Álcool de cereais
+Galão Álcool Hidratado de Cereais|5L|65,00
+Álcool Hidratado de Cereais|1L|15,00
+Álcool Hidratado de Cereais|500ml|8,00
+## Flora 7 Ervas
+Bullet|24 flaconetes de 20ml|33,00
+Chá Boldo, flaconetes de 10ml|56 flaconetes|39,00
+Hiperligado, flaconetes de 10ml|56 flaconetes|39,00
+Bala de Gengibre, display c/ 10 un. (extra forte / hortelã / cravo e canela / mel)|10 un.|21,90
+Cristais de Gengibre light zero açúcar, display 6 × 10g|display|28,00
+Cristais de Gengibre, display 6 × 15g|display|28,00
+Cristais de Gengibre, pote unitário (mel / tradicional / cravo e canela / menta zero / cravo e canela zero / limão e sal zero)|10g / 15g|4,70
+## Flowbar
+Barra Nuts Cranberry 70% Cacau|30g|3,70
+Barra Nuts Cranberry|30g|3,20
+Barra Nuts Gojiberry|30g|3,20
+Barra de cereais Amêndoas, Nozes e Castanhas|45g|3,20
+Granola Clusters Cranberry Nuts|300g|21,50
+Granola Clusters Vegana Nuts|250g|21,50
+Granola de Aveia com Cranberry|300g|11,90
+Granola de Aveia Vegana com Coco|250g|11,90
+Barra de Nuts Crispie Cranberry|20g|2,40
+Barra de Nuts Crispie Gojiberry|20g|2,40
+Barra de Nuts Crispie Amêndoas|20g|2,40
+Barra de Banana zero açúcar chocolate ao leite|24g|2,20
+## Prodapys
+Bala de Anis (10 pacotes de 60g)|600g|38,00
+Bala de Eucalipto (10 pacotes de 60g)|600g|38,00
+Bala de Gengibre (10 pacotes de 60g)|600g|38,00
+Bala de Gengibre, Cravo e Canela (10 pacotes de 60g)|600g|38,00
+Bala de Própolis (10 pacotes de 60g)|600g|38,00
+Bala pacote unitário (sabores)|60g|3,90
+Composto de Mel e Extrato de Própolis (romã / guaco / gengibre / agrião e eucalipto)|300g|23,00
+Condicionador Própolis e Jaborandi|350ml|39,00
+Creme Cera de Abelha|85g|29,50
+Creme Facial Geleia Real|50g|47,50
+Extrato Aquoso de Própolis|30ml|16,90
+Extrato Concentrado de Própolis Marrom 15%|30ml|15,50
+Extrato Concentrado de Própolis Verde 15%|30ml|21,00
+Extrato Concentrado de Própolis Blend (verde / marrom / vermelho)|30ml|19,90
+Cápsulas de extrato de própolis verde|45 caps|23,50
+Cápsulas de extrato de própolis verde c/ vit. D3 2.000ui|45 caps|23,50
+Gel de Própolis|70g|10,90
+Mel pote vidro premiado (claro / escuro)|300g|28,00
+Melitina (creme facial de veneno de abelha)|50g|48,00
+Pólen desidratado|120g|47,00
+Sabonete Glicerinado de Própolis|90g|13,50
+Shampoo Própolis e Jaborandi|350ml|39,00
+Spray Própolis s/ álcool|33ml|9,20
+Mel Bracatinga|1kg|61,90
+Mel Eucalipto / Mel Uva Japonesa|1kg|59,90
+Mel Laranjeira|1kg|69,90
+Mel bisnaga Multiflores|550g|35,90
+Mel bisnaga Uva Japonesa|550g|36,50
+Mel bisnaga Bracatinga|550g|36,50
+Mel bisnaga Laranjeira|550g|39,90
+Mel bisnaga Multiflores|300g|19,90
+Mel bisnaga Uva Japonesa|300g|22,90
+Mel bisnaga Bracatinga|300g|23,50
+Mel bisnaga Laranjeira|300g|24,50
+## Nutryervas
+Berinjela|60 caps|11,00
+Biotina + B1 + B5 + Ácido Fólico|60 caps|16,70
+Clorella CGF|60 comp.|24,50
+Colágeno Hidrolisado|60 caps|16,90
+Complexo B + Zinco + D3|60 caps|13,50
+Chá Verde + Picolinato de Cromo|60 comp.|17,90
+Colágeno + Vit. C + Picolinato de Cromo|60 caps|17,50
+Dolomita + D|90 caps|16,90
+Dolomita + D em pó|700g|18,90
+Dolomita em pó|680g|15,90
+Ferro-C|60 caps|15,00
+Guaraná|60 caps|12,50
+Geleia Real + Vit. C|60 comp.|22,50
+Levedo de Cerveja|400 comp.|17,90
+Magnésio Treonato|60 caps|18,90
+Magnésio|60 caps|16,50
+Malato de Magnésio|60 caps|20,00
+Melatonina + Triptofano|60 caps|18,90
+Óleo de Alho 500mg|60 caps|21,90
+Óleo de Cártamo (Linocart)|90 caps|37,00
+Óleo de Coco 1000mg|90 caps|33,90
+Picolinato de Cromo|60 caps|12,00
+Psyllium|60 caps|16,50
+Polivitamínico e polimineral (Vitali A–Z)|60 comp.|17,90
+Selênio|60 caps|13,90
+Spirulina 500mg|60 caps|17,90
+Vitamina B12 + B9 + Ácido Fólico|90 comp.|11,90
+Vitamina E 400ui|60 caps|23,50
+Vitamina B6|60 caps|13,90
+Vitamina D3 + K2|90 comp.|19,00
+Vitamina C 1000mg + Zinco|60 caps|17,90
+Vitamina C + Arginina + Taurina|60 caps|21,90
+Zinco|60 caps|15,50
+## Lowçucar
+Adoçante Magro Sucralose líquido|65ml|7,50
+New Chocolate Diet|210g|16,50
+Adoçante Lowçucar Plus Via (stévia, eritritol, xilitol e taumatina)|65ml|16,90
+Adoçante Magro 100% Stévia|60ml|11,50
+Adoçante Sóstevia líquido|65ml|19,90
+Adoçante Blenda Sucralose líquido|65ml|12,50
+Gelatina Magro Sucralose (vários sabores)|10g|3,10
+Pó para preparo de Leite Condensado Diet|220g|17,30
+Adoçante sachês Só Stévia, cx c/ 1.000 un.|1.000 un.|89,00
+Adoçante sachês Sucralose, cx c/ 1.000 un.|1.000 un.|80,00
+## AlcaFoods
+All Fibrous|1kg|21,00
+Sucrilhos Alca Foods (chocolate / açúcar mascavo)|1kg|19,00
+Sucrilhos Alca Foods (natural / natural light / mel / banana / açúcar)|1kg|18,00
+Chocoboll|1kg|18,00
+Cereal Fruit Rings|1kg|19,00
+## Igual Qui Nem
+Brigadeiro sem lactose e sem açúcar|135g|14,30
+Cocada cremosa sem açúcar|135g|14,60
+Doce de Leite Argentino sem lactose e sem açúcar|135g|16,20
+Doce de leite tradicional sem açúcar|135g|14,90
+Doce de leite limão siciliano sem açúcar|135g|16,20
+Pudim sem lactose e sem açúcar|135g|13,90
+Delícia Condensada sem açúcar|330g|24,50
+Doce de leite Argentino sem lactose e sem açúcar|330g|29,90
+Doce de leite tradicional sem açúcar|330g|24,50
+## Chá Mais
+Ansiozen (magnésio + triptofano)|60 caps|23,50
+Cálcio Calmais Alga Lithothamnium|60 caps|21,00
+Caffeine|30 caps|18,50
+Cloreto de Magnésio P.A. sachês 33g (display c/ 20 un.)|display c/ 20|85,00
+Chá Abacaxi, Hortelã, Chá Verde e Gengibre (10 env. c/ 15g)|10 env.|4,30
+Chá Anis Estrelado c/ Mate tostado|10 env.|4,20
+Chá Erva Doce|10 env.|3,60
+Chá de Hibisco (10 env. c/ 12g)|10 env.|4,50
+Chá de Funcho|10 env.|3,50
+Chá Maçã, Canela, Cravo e Gengibre (10 env. c/ 15g)|10 env.|4,90
+Chá Maçã com Canela|10 env.|4,90
+Chá Maçã, Pêssego, Laranja e Mate|10 env.|5,20
+Chá Morango (10 env. c/ 15g)|10 env.|4,50
+Chá Camomila (10 env. c/ 12g)|10 env.|2,95
+Chá Camomila, Laranja e Mel|10 env.|3,20
+Chá Cidreira (10 env. c/ 12g)|10 env.|3,20
+Chá Flores e Frutas sabor Cereja e Framboesa|10 env.|4,20
+Chá Frutas Vermelhas sabor morango|10 env.|5,50
+Chá Sublime Paixão sabor Frutas Vermelhas|10 env.|4,20
+Chá Sublime Inverno, Laranja e Mel|10 env.|4,90
+Sublime Inocência: erva doce / funcho / endro (10 env. 12g)|10 env.|3,60
+Sublime Noite (10 env. 12g)|10 env.|3,80
+Sublime Ternura (10 env. c/ 12g)|10 env.|3,80
+Chá Bom Dia sabor Frutas Negras (gelado ou quente)|15 env.|10,00
+Chá Boa Noite sabor Maracujá (gelado ou quente)|15 env.|8,90
+Chá Melissa (10 env. c/ 12g)|10 env.|3,20
+Chá Pêssego com Baunilha (10 env. c/ 15g)|10 env.|4,70
+Chá Maracujá|10 env.|4,90
+Chá Verde|10 env.|3,90
+Chá Verde|30 env.|11,50
+Chá Hortelã (10 env. c/ 12g)|10 env.|3,00
+Cranberry (com 7,5mg de proantocianidinas)|30 caps|32,90
+Licopeno|30 caps|27,90
+Luteína e Zeaxantina|30 caps|32,90
+Melatonina 210mcg|30 caps|14,90
+Multivitaminas 500mg|60 caps|23,50
+Magnésio e Treonina|60 caps|29,50
+5 Magnésios|90 caps|27,90
+Ômega 3 mais 1.000mg MEG-6|90 caps|45,00
+Óleo de alho 500mg|60 caps|16,50
+Óleo de Abacate 1.000mg|60 caps|22,00
+Óleo de Linhaça 1000mg|60 caps|21,90
+3 Ômegas (óleo de peixe, linhaça e borragem) 1000mg|60 caps|29,50
+Óleo de Prímula 1000mg|60 caps|27,50
+Óleo de Prímula, Borragem + L-triptofano 1.000mg|60 caps|24,50
+Óleo de Semente de Abóbora 1.400mg|60 caps|30,00
+Óleo de Chia + Cártamo + Coco 1.000mg|60 caps|17,90
+Rejuvecel CoQ10 100mg com semente de uva|30 caps|36,00
+K2 + D3|30 caps|22,90
+Moro Mais (Morosil) Laranja Moro e Picolinato de Cromo|60 caps|84,90
+Zinco Quelato 29,5mg|30 caps|13,50
+Vitamina C + Zinco|30 caps|19,00
+Vitamina D3 2.000ui|30 caps|16,50
+Vitamina K2|30 caps|22,90
+Vitamina B12 450mg|60 caps|22,90
+Vitamina Complexo B 450mg|60 caps|21,50
+## Superbom
+Café Cevada torrada moído|500g|6,50
+Café de Milho|500g|6,50
+Cevada solúvel|200g|25,00
+Molho Vegetale|250g|6,80
+Melado de Cana|330g|13,70
+Bife Vegetal|400g|16,50
+Bife Vegetal|840g|32,00
+Salsicha Vegetal|400g|17,90
+Salsicha Vegetal|880g|41,50
+Medalhão vegetal ao molho madeira|400g|19,90
+Atum de plantas|140g|9,80
+Hambúrguer Vegetal|360g|18,50
+Almôndega vegetal ao sugo|400g|24,00
+Carne Vegetal|400g|15,50
+Frango Desfiado Vegetal|370g|21,50
+Frango Caipira Vegetal|370g|14,70
+Cubinhos Mexicano Vegetal|380g|21,90
+Geleia 100% fruta sem açúcar, Uva|160g|15,50
+Geleia 100% fruta sem açúcar, Morango|160g|15,50
+Geleia 100% fruta sem açúcar, Frutas Vermelhas|160g|15,50
+Geleia 100% fruta sem açúcar, Damasco|160g|15,50
+Mel com Geleia Real, bisnaga|200g|20,50
+Mel bisnaga|200g|17,50
+Suco de Uva integral|1L|18,00
+Suco de Uva Branco integral|1L|19,00
+Suco de Tomate 100% puro|1L|16,50
+## Flora Nativa do Brasil
+Boro 8mg|60 caps|19,00
+B-Complex 500mg|60 caps|15,50
+Biotina (B7) 150% IDR|60 caps|15,90
+Beta-Alanina 100% pura FNB|200g|26,00
+Cafeína 200mg anidra|60 caps|18,00
+Cafeína + Taurina FNB|60 caps|22,90
+Cloreto de Magnésio|60 caps|15,90
+Coenzima Q10 100mg|60 caps|25,90
+Coenzima Q10 200mg|60 caps|36,90
+Coenzima Q10 100mg gotas|30ml|26,90
+Colágeno Hidrolisado Verisol (frutas vermelhas)|250g|55,00
+Colágeno Verisol + Ácido Hialurônico (tangerina)|250g|59,50
+Colágeno Verisol + Ácido Hialurônico (laranja + morango)|250g|59,50
+Colágeno Verisol + Ácido Hialurônico|120 caps|46,20
+Colágeno Hidrolisado Verisol Night (maracujá)|250g|60,00
+Creatina 100% pura monohidratada e micronizada FNB|300g|39,00
+Colágeno Tipo II 40mg, blister|30 caps|21,00
+Cúrcuma (95% curcumina) 500mg|60 caps|24,90
+Ferro + Ác. Fólico e Vit. B12|60 caps|15,90
+Feno Grego (Testofen) 70% saponinas (300mg furostanol)|60 caps|49,00
+Imuni Turbo 800mg|60 caps|25,00
+L-Arginina FNB|120 caps|23,50
+Laranja Moro + Picolinato de Cromo 500mg|60 caps|49,50
+Luteína e Zeaxantina 500mg|60 caps|23,50
+Lisina 1.000mg|60 caps|17,90
+Methyl B12 líquida|20ml|18,90
+Metilfolato de Cálcio + associações, blister|30 caps|13,90
+Melatonina gotas|30ml|18,90
+Melatonina + associações|90 caps|24,90
+Magnésio Dimalato 500mg|60 caps|19,50
+Magnésio Quelato|60 caps|14,00
+Magnésio + Inositol|60 caps|22,00
+Magnésio + Treonina (treonato)|60 caps|18,50
+6 Magnésio|60 caps|24,00
+Magnésio Taurato|60 caps|18,90
+MSM Enxofre Orgânico 500mg|60 caps|21,00
+Multivitamínico A–Z|60 caps|15,90
+Nativa Amargo Clean|500ml|19,50
+Neurofan|60 caps|41,50
+NAC (acetilcisteína) 600mg|30 caps|20,00
+Óleo de Borragem|60 caps|22,50
+Óleo de Prímula 500mg|60 caps|20,00
+Óleo de Semente de Abóbora c/ Vitamina E|60 caps|28,00
+Óleo de Cúrcuma + Vitamina E gotas|30ml|14,50
+Picolinato de Cromo 250mcg|60 caps|15,50
+Pinus Master + associações|60 caps|19,50
+Psyllium|60 caps|16,90
+Potássio 500mg|60 caps|17,50
+Própolis Verde 500mg|60 caps|19,20
+Coenzima Q10 + Ômega 3|60 caps|47,50
+Sulfato Ferroso|60 caps|13,90
+Selênio 300% IDR 500mg|60 caps|14,90
+Sleep Max 450mg (triptofano + associações)|60 caps|23,00
+Tri Magnésio (taurato, malato e quelato) 500mg|60 caps|22,50
+Triptofano 250mg|60 caps|18,50
+Taurina|90 caps|18,00
+Trans Resveratrol natural|30 caps|38,90
+Vitamina A 8.000ui|60 caps|14,90
+Vitamina B12 396% IDR 500mg|60 caps|14,50
+Vitamina C + D3 + Zinco|60 caps|16,90
+Vitamina D3 2.000ui|60 caps|16,50
+Vitamina K2 MK7 (125mcg)|60 caps|19,00
+Vitamina D3 + K2 (2.000ui D3 / 149mcg K2)|30 caps|18,90
+Ultra Condrix Flex, blister|60 caps|47,50
+Imunitrix Kids (vit. C + vit. D + zinco, infantil) gotas|30ml|17,50
+Multrix (multivitamínico infantil A–Z) líquido|120ml|10,70
+D-Trix (vitamina D 400ui infantil) gotas|30ml|22,00
+Zintrix (zinco 2mg infantil) gotas|20ml|15,50`;
+
+const cats = []; let id = 0;
+RAW.split("\n").forEach(l => {
+  if (!l.trim()) return;
+  if (l.startsWith("## ")) { cats.push({ n: l.slice(3), items: [] }); return; }
+  const [name, vol, p] = l.split("|");
+  const out = p === "falta";
+  cats[cats.length-1].items.push({ id: ++id, name, vol, price: out ? 0 : parseFloat(p.replace(",", ".")), out });
+});
+const all = {}; cats.forEach(c => c.items.forEach(i => all[i.id] = i));
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+let cart = {}; let cur = -1; let term = ""; let lastOrder = "";
+try { cart = JSON.parse(localStorage.getItem("kv-cart") || "{}"); } catch (e) {}
+const save = () => { try { localStorage.setItem("kv-cart", JSON.stringify(cart)); } catch (e) {} };
+Object.keys(cart).forEach(k => { if (!all[k]) delete cart[k]; });
+
+const $ = s => document.querySelector(s);
+function ctl(i) {
+  if (i.out) return `<span class="out">Em falta</span>`;
+  const q = cart[i.id] || 0;
+  return q ? `<span class="step"><button data-dec="${i.id}" aria-label="Diminuir">−</button><b>${q}</b><button data-inc="${i.id}" aria-label="Aumentar">+</button></span>`
+           : `<button class="add" data-inc="${i.id}">Adicionar</button>`;
+}
+function renderNav() {
+  const total = cats.reduce((a, c) => a + c.items.length, 0);
+  $("#nav").innerHTML = `<button data-cat="-1" aria-pressed="${cur === -1}">Todos <span>${total}</span></button>` +
+    cats.map((c, k) => `<button data-cat="${k}" aria-pressed="${cur === k}">${c.n} <span>${c.items.length}</span></button>`).join("");
+}
+function renderList() {
+  const t = norm(term.trim()); let html = "", n = 0;
+  cats.forEach((c, k) => {
+    if (cur !== -1 && cur !== k) return;
+    const catHit = t && norm(c.n).includes(t);
+    const its = c.items.filter(i => !t || catHit || norm(i.name).includes(t));
+    if (!its.length) return;
+    n += its.length;
+    html += `<h2>${c.n}</h2>` + its.map(i => `<div class="row" data-row="${i.id}"><div class="name">${i.name}<span class="vol">${i.vol}</span></div><div class="price">${i.out ? "—" : brl(i.price)}</div><div class="ctl">${ctl(i)}</div></div>`).join("");
+  });
+  $("#list").innerHTML = n ? html : `<p class="empty">Nenhum produto encontrado para "${term.replace(/</g, "&lt;")}". Tente outra palavra ou limpe a busca.</p>`;
+}
+function updateRow(idn) {
+  const r = document.querySelector(`[data-row="${idn}"] .ctl`);
+  if (r) r.innerHTML = ctl(all[idn]);
+}
+function renderCart() {
+  const ids = Object.keys(cart); let tot = 0, cnt = 0;
+  $("#items").innerHTML = ids.length ? ids.map(k => {
+    const i = all[k], q = cart[k]; tot += i.price * q; cnt += q;
+    return `<div class="ci"><div class="name">${i.name}<span class="vol">${i.vol} · ${brl(i.price)}</span></div><span class="step"><button data-dec="${k}" aria-label="Diminuir">−</button><b>${q}</b><button data-inc="${k}" aria-label="Aumentar">+</button></span><div class="price" style="text-align:left">${brl(i.price * q)}</div></div>`;
+  }).join("") : (lastOrder ? `<p class="empty"><b>Pedido enviado!</b><br>O carrinho foi esvaziado. Se o WhatsApp não abriu, copie o pedido e cole na conversa com (12) 99625-4466.</p><button class="sec" id="again" style="width:100%">Copiar pedido enviado</button>` : `<p class="empty">Seu pedido está vazio. Toque em "Adicionar" nos produtos para começar.</p>`);
+  $("#tot").textContent = brl(tot); $("#cnt").textContent = cnt;
+}
+function change(idn, d) {
+  lastOrder = "";
+  const q = Math.max(0, (cart[idn] || 0) + d);
+  if (q) cart[idn] = q; else delete cart[idn];
+  save(); updateRow(idn); renderCart();
+}
+function orderText() {
+  const ids = Object.keys(cart); let tot = 0;
+  const lines = ids.map(k => { const i = all[k], q = cart[k]; tot += i.price * q; return `• ${q}x ${i.name} (${i.vol}) — ${brl(i.price * q)}`; });
+  const who = $("#cust").value.trim();
+  return `Olá, Kaza Verde! Gostaria de fazer um pedido${who ? " em nome de " + who : ""}:\n\n${lines.join("\n")}\n\nTotal: ${brl(tot)}\n(preços da lista de julho/2026)`;
+}
+function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; setTimeout(() => t.style.display = "none", 2200); }
+function openCart(on) {
+  $("#cart").classList.toggle("on", on); $("#scrim").classList.toggle("on", on);
+  $("#cart").setAttribute("aria-hidden", String(!on));
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.id === "again") { try { navigator.clipboard.writeText(lastOrder); toast("Pedido copiado."); } catch (err) { toast("Não foi possível copiar."); } return; }
+  if (b.dataset.inc) change(b.dataset.inc, 1);
+  else if (b.dataset.dec) change(b.dataset.dec, -1);
+  else if (b.dataset.cat !== undefined) { cur = +b.dataset.cat; renderNav(); renderList(); window.scrollTo({ top: 0 }); }
+});
+$("#q").addEventListener("input", e => { term = e.target.value; renderList(); });
+$("#openCart").onclick = () => openCart(true);
+$("#closeCart").onclick = $("#scrim").onclick = () => openCart(false);
+document.addEventListener("keydown", e => { if (e.key === "Escape") openCart(false); });
+$("#wa").addEventListener("click", e => {
+  if (!Object.keys(cart).length) { e.preventDefault(); return toast("Adicione ao menos um produto."); }
+  const txt = orderText();
+  e.currentTarget.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
+  try { navigator.clipboard.writeText(txt); } catch (err) {}
+  $("#hint").hidden = false;
+  setTimeout(() => { lastOrder = txt; cart = {}; save(); renderList(); renderCart(); $("#cust").value = ""; }, 400);
+});
+$("#copy").onclick = async () => {
+  if (!Object.keys(cart).length) return toast("Adicione ao menos um produto.");
+  try { await navigator.clipboard.writeText(orderText()); toast("Pedido copiado."); } catch (e) { toast("Não foi possível copiar."); }
+};
+$("#clear").onclick = () => { lastOrder = ""; cart = {}; save(); renderCart(); renderList(); };
+
+renderNav(); renderList(); renderCart();
+</script>
+</body>
+</html>
